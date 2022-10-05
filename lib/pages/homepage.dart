@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:to_do_app/utils/dialog_box.dart';
 import 'package:to_do_app/utils/todo_tile.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _HomePageState extends State<HomePage> {
     ["Wake up at 6", false],
     ["Exercise", false],
     ["Breakfast", false],
+    ["Check Mail", false],
   ];
 
   //checkbox was tapped
@@ -25,6 +27,16 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  //create a new task
+  void createNewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +44,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Center(child: Text('TO DO')),
         elevation: 0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: createNewTask,
+        child: Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: toDoList.length,
